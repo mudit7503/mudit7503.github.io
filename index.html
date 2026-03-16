@@ -1,43 +1,153 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Mudit Mishra</title>
+
 <style>
+
 body{
-font-family: Arial;
-max-width:800px;
-margin:auto;
-padding:40px;
-line-height:1.6;
+font-family: 'Segoe UI', sans-serif;
+background: #0f172a;
+color:white;
+margin:0;
+}
+
+header{
+text-align:center;
+padding:60px 20px;
+background:linear-gradient(135deg,#6366f1,#06b6d4);
 }
 
 h1{
-color:#2c3e50;
+font-size:48px;
+margin:0;
 }
+
+nav{
+text-align:center;
+background:#111827;
+padding:15px;
+}
+
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#06b6d4;
+}
+
+section{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+}
+
+.card{
+background:#1f2937;
+padding:20px;
+margin:20px 0;
+border-radius:10px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+button{
+background:#06b6d4;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#0891b2;
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#111827;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h1>Mudit Mishra</h1>
-<p>Electrical Engineering Undergraduate</p>
+<header>
 
-<h2>About</h2>
+<h1>Mudit Mishra</h1>
+<p>Electrical Engineering Student | Builder | Embedded Systems</p>
+
+</header>
+
+<nav>
+
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+
+</nav>
+
+<section id="about">
+
+<h2>About Me</h2>
+
 <p>
-Electrical engineering student interested in electronics,
-embedded systems, and engineering projects.
+I'm an electrical engineering student interested in embedded systems,
+electronics projects, and building real hardware.
 </p>
+
+</section>
+
+<section id="projects">
 
 <h2>Projects</h2>
-<ul>
-<li>Electronics builds</li>
-<li>Embedded systems experiments</li>
-</ul>
+
+<div class="card">
+<h3>Arduino RC Car</h3>
+<p>Custom built RC car using Arduino and motor drivers.</p>
+<button onclick="window.location.href='https://github.com/mudit7503'">
+View Code
+</button>
+</div>
+
+<div class="card">
+<h3>Electronics Builds</h3>
+<p>Experiments with circuits, embedded systems, and hardware.</p>
+</div>
+
+</section>
+
+<section id="contact">
 
 <h2>Contact</h2>
+
 <p>
-GitHub: https://github.com/mudit7503
+GitHub: 
+<a href="https://github.com/mudit7503" style="color:#06b6d4">
+github.com/mudit7503
+</a>
 </p>
 
+</section>
+
+<footer>
+
+<p>© 2026 Mudit Mishra</p>
+
+</footer>
+
 </body>
+
 </html>
