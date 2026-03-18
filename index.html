@@ -1,163 +1,524 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mudit Mishra</title>
+<base href="/">
 
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body{
-font-family: 'Segoe UI', sans-serif;
-background: #0f172a;
-color:white;
-margin:0;
-}
+  :root {
+    --blue-50: #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --blue-900: #042C53;
+    --gray-50: #F1EFE8;
+    --gray-100: #D3D1C7;
+    --gray-200: #B4B2A9;
+    --gray-400: #888780;
+    --gray-600: #5F5E5A;
+    --gray-800: #444441;
+    --gray-900: #2C2C2A;
+    --white: #ffffff;
+  }
 
-header{
-text-align:center;
-padding:60px 20px;
-background:linear-gradient(135deg,#6366f1,#06b6d4);
-}
+  html { scroll-behavior: smooth; }
 
-h1{
-font-size:48px;
-margin:0;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F7F8FA;
+    color: var(--gray-900);
+    font-size: 16px;
+    line-height: 1.7;
+  }
 
-nav{
-text-align:center;
-background:#111827;
-padding:15px;
-}
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 6vw;
+    background: rgba(247,248,250,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(180,178,169,0.3);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--blue-800);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--gray-600);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue-600); }
 
-nav a{
-color:white;
-margin:0 15px;
-text-decoration:none;
-font-weight:bold;
-}
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 6vw;
+    gap: 4rem;
+    padding-top: 80px;
+  }
+  .hero-text { animation: fadeUp 0.9s ease both; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    margin-bottom: 1.2rem;
+    padding: 0.3rem 0.9rem;
+    background: var(--blue-50);
+    border-radius: 100px;
+    border: 1px solid var(--blue-100);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--blue-600);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: var(--blue-600);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--blue-800); transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border: 1.5px solid var(--blue-100);
+    color: var(--blue-800);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--blue-400); transform: translateY(-1px); }
 
-nav a:hover{
-color:#06b6d4;
-}
+  /* hero visual */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeUp 1.1s ease 0.2s both;
+  }
+  .avatar-card {
+    background: var(--white);
+    border-radius: 24px;
+    border: 1px solid var(--gray-100);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    max-width: 280px;
+    width: 100%;
+    box-shadow: 0 4px 40px rgba(55,138,221,0.07);
+  }
+  .avatar-ring {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1.2rem;
+    background: linear-gradient(135deg, var(--blue-100), var(--blue-400));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--blue-900);
+  }
+  .avatar-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--gray-900);
+    margin-bottom: 0.3rem;
+  }
+  .avatar-card p {
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    margin-bottom: 1.4rem;
+  }
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .tech-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    background: var(--blue-50);
+    color: var(--blue-800);
+    border-radius: 100px;
+    border: 1px solid var(--blue-100);
+  }
+  .status-dot {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem; color: #3B6D11; background: #EAF3DE;
+    padding: 0.3rem 0.8rem; border-radius: 100px; margin-top: 1.2rem;
+    border: 1px solid #C0DD97;
+  }
+  .status-dot::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: #639922; display: inline-block;
+    animation: pulse 2s infinite;
+  }
 
-section{
-max-width:900px;
-margin:auto;
-padding:60px 20px;
-}
+  /* ABOUT */
+  section { padding: 6rem 6vw; }
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.15;
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-text p {
+    color: var(--gray-600);
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--blue-100); transform: translateY(-2px); }
+  .skill-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .skill-card h4 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 0.3rem;
+  }
+  .skill-card p { font-size: 0.78rem; color: var(--gray-400); line-height: 1.5; }
 
-.card{
-background:#1f2937;
-padding:20px;
-margin:20px 0;
-border-radius:10px;
-transition:0.3s;
-}
+  /* PROJECTS */
+  .projects-bg { background: var(--white); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .project-card {
+    background: #F7F8FA;
+    border: 1px solid var(--gray-100);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue-400), var(--blue-100));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--blue-100);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(55,138,221,0.1);
+  }
+  .project-card:hover::before { opacity: 1; }
+  .project-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--blue-100);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .project-card h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 0.6rem;
+  }
+  .project-card p {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-bullets {
+    list-style: disc;
+    padding-left: 1.2rem;
+    font-size: 0.88rem;
+    color: var(--gray-600);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .project-bullets li { margin-bottom: 0.5rem; }
+  .project-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.25rem 0.6rem;
+    background: var(--blue-50);
+    color: var(--blue-800);
+    border-radius: 100px;
+  }
 
-.card:hover{
-transform:scale(1.03);
-}
+  /* CONTACT */
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-inner .section-label { display: block; }
+  .contact-inner .section-title { margin-bottom: 1rem; }
+  .contact-sub {
+    color: var(--gray-600);
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1.5px solid var(--gray-100);
+    border-radius: 8px;
+    color: var(--gray-800);
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-decoration: none;
+    background: var(--white);
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .contact-link:hover {
+    border-color: var(--blue-400);
+    color: var(--blue-600);
+    transform: translateY(-2px);
+  }
 
-button{
-background:#06b6d4;
-border:none;
-padding:10px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-}
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--gray-100);
+    font-size: 0.82rem;
+    color: var(--gray-400);
+  }
 
-button:hover{
-background:#0891b2;
-}
+  /* DIVIDER */
+  .divider { width: 48px; height: 2px; background: var(--blue-100); margin-bottom: 2rem; border-radius: 2px; }
 
-footer{
-text-align:center;
-padding:30px;
-background:#111827;
-}
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
 
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px; }
+    .hero-sub { margin: 0 auto 2.5rem; }
+    .hero-cta { justify-content: center; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .nav-links { display: none; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<header>
-
-<h1>Mudit Mishra</h1>
-<p>Electrical Engineering Student | Embedded Systems</p>
-
-</header>
-
+<!-- NAV -->
 <nav>
-
-<a href="#about">About</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-
+  <a href="#" class="nav-logo">MM</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Hi, I'm <em>Mudit</em><br>Mishra.</h1>
+    <p class="hero-sub">Pre-Final Year Undergraduate, Department of Electrical Engineering, Harcourt Butler Technical University, Kanpur.</p>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="avatar-card">
+      <div class="avatar-ring">MM</div>
+      <h3>Mudit Mishra</h3>
+      <div class="tech-tags">
+        <span class="tech-tag">Embedded C</span>
+        <span class="tech-tag">MATLAB</span>
+        <span class="tech-tag">Arduino</span>
+        <span class="tech-tag">LTspice</span>
+        <span class="tech-tag">Simulink</span>
+      </div>
+      <div class="status-dot">Open to internships</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
 <section id="about">
-
-<h2>About Me</h2>
-
-<p>
-Undergraduate electrical engineering student with an interest in electronics and embedded systems. Currently exploring practical applications through coursework and personal projects.
-</p>
-
+  <div class="about-grid">
+    <div class="about-text">
+      <span class="section-label">About Me</span>
+      <h2 class="section-title">About me.</h2>
+      <div class="divider"></div>
+      <p>I am an undergraduate Electrical Engineering student with a strong interest in embedded systems and control systems. My academic and project work focuses on the intersection of electronics, real-time systems, and intelligent control.</p>
+      <p>I enjoy building practical engineering systems and have worked on projects involving microcontrollers, motor control, and embedded platforms. I aim to pursue a career in advanced engineering technology, contributing to the development of reliable, high-performance electronic and control systems.</p>
+      <p>I am keen to collaborate with researchers and engineers working in embedded systems, electronics, and related fields.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <h4>Core</h4>
+        <p>Electrical Machines, Power Systems, Power Electronics</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h4>Simulation / Analysis</h4>
+        <p>MATLAB, Simulink, LTspice</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔌</div>
+        <h4>Embedded Systems</h4>
+        <p>Embedded C/C++, Arduino, PlatformIO</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="projects">
-
-<h2>Projects</h2>
-
-<div class="card">
-<h3>Aeroderivative Turbine Power Control</h3>
-<p>Control-oriented modeling and FADEC-inspired control of an aeroderivative gas turbine for stationary power applications.</p>
-<button onclick="window.location.href='https://github.com/mudit7503/Aeroderivative-Turbine-Power-Control'">
-View Code
-</button>
-</div>
-
-<div class="card">
-<h3>Electronics Builds</h3>
-<p>Experiments with circuits, embedded systems, and hardware.</p>
-</div>
-
+<!-- PROJECTS -->
+<section id="projects" class="projects-bg">
+  <span class="section-label">Projects</span>
+  <h2 class="section-title">Things I've built.</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <h3>Aeroderivative Turbine Power Control <a href="https://github.com" target="_blank" style="font-size:0.75rem; color: var(--blue-600); text-decoration: none; vertical-align: middle;">↗ GitHub</a></h3>
+      <ul class="project-bullets">
+        <li>Developed a simplified dynamic model of a gas-turbine-driven generator using MATLAB and Simulink for stationary power applications.</li>
+        <li>Designed FADEC-inspired digital control logic for speed and voltage regulation under transient electrical loads.</li>
+        <li>Simulated generator rectification and DC bus behaviour using LTspice.</li>
+        <li>Implemented embedded-style supervisory control logic (state-machine based) using PlatformIO.</li>
+      </ul>
+      <div class="project-tags" style="margin-top: 1rem;">
+        <span class="project-tag">PlatformIO</span>
+        <span class="project-tag">MATLAB</span>
+        <span class="project-tag">Simulink</span>
+        <span class="project-tag">LTspice</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <h3>PWM-Controlled 4WD RC Vehicle</h3>
+      <ul class="project-bullets">
+        <li>Designed and assembled an RC car as part of a student team, using Arduino, two BTS7960 motor drivers, and Johnson geared DC motors to achieve four-wheel drive motion.</li>
+        <li>Programmed the microcontroller using Arduino IDE, implementing PWM-based speed control and direction logic to drive the motor drivers.</li>
+        <li>Interfaced the Arduino with an off-the-shelf RC receiver to translate transmitter inputs into vehicle-side control signals, enabling coordinated multi-motor control, smooth steering, and effective obstacle navigation.</li>
+        <li>Tested, debugged, and refined firmware and hardware during live obstacle-course runs, improving motor response, stability, and overall system reliability.</li>
+      </ul>
+      <div class="project-tags" style="margin-top: 1rem;">
+        <span class="project-tag">Arduino</span>
+        <span class="project-tag">Embedded C</span>
+        <span class="project-tag">PWM Motor Control</span>
+        <span class="project-tag">BTS7960</span>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
-
-<h2>Contact</h2>
-
-<p>
-LinkedIn: 
-<a href="https://linkedin.com/in/mudit-mishra-0a917b353" style="color:#06b6d4">
-linkedin.com/in/mudit-mishra-0a917b353
-</a>
-</p>
-<p>
-GitHub: 
-<a href="https://github.com/mudit7503" style="color:#06b6d4">
-github.com/mudit7503
-</a>
-</p>
-<p>
-GitHub: 
-<a href="https://ieee-collabratec.ieee.org/app/p/MuditMishra1184206" style="color:#06b6d4">
-ieee-collabratec.ieee.org/app/p/MuditMishra1184206
-</a>
-</p>
+  <div class="contact-inner">
+    <span class="section-label">Contact</span>
+    <h2 class="section-title">Let's work together.</h2>
+    <p class="contact-sub">Whether you have a project in mind, an internship opportunity to share, or just want to connect — feel free to reach out.</p>
+    <div class="contact-links">
+      <a href="mailto:mudit@example.com" class="contact-link">✉️ Email</a>
+      <a href="https://linkedin.com/in/mudit" target="_blank" class="contact-link">💼 LinkedIn</a>
+      <a href="https://github.com/mudit" target="_blank" class="contact-link">🐙 GitHub</a>
+      <a href="https://ieee-collabratec.ieee.org/" target="_blank" class="contact-link">📡 IEEE Collabratec</a>
+    </div>
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-
-<p>© 2026 Mudit Mishra</p>
-
-</footer>
-
-</body>
-
-</html>
+  <p>© 2026 Mudit Mishra. Designed wi
